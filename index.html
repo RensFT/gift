@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Untuk Yiyi</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --pink: #c9506f;
+    --pink-soft: #f7dfe5;
+    --cream: #fffdfa;
+    --text: #7a5560;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--text);
+    min-height: 100vh;
+    background-color: #f6dfe5;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -30px;
+    z-index: -2;
+    background:
+      linear-gradient(rgba(250, 228, 234, 0.50), rgba(240, 200, 212, 0.60)),
+      url('foto-kami.jpg') center / cover no-repeat;
+    filter: blur(16px);
+  }
+
+  .photo-panel {
+    position: fixed;
+    z-index: 1;
+    left: 3vw;
+    top: 4vh;
+    bottom: 4vh;
+    width: 40vw;
+    border-radius: 28px;
+    border: 6px solid var(--cream);
+    background: url('foto-kami.jpg') center 66% / cover no-repeat;
+    box-shadow: 0 18px 50px rgba(120, 40, 70, .35);
+  }
+
+  section { margin-left: 46vw; width: 54vw; }
+
+  .hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    font-size: 24px;
+    color: #f4b6c6;
+    opacity: .6;
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    to {
+      transform: translateY(-115vh) rotate(25deg);
+      opacity: 0;
+    }
+  }
+
+  section {
+    display: none;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 48px 20px 80px;
+    text-align: center;
+  }
+
+  section.active {
+    display: block;
+    animation: fade .6s ease;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+      transform: translateX(50px) scale(.97);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  .eyebrow {
+    letter-spacing: .3em;
+    font-size: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 0 1px 8px rgba(0,0,0,.45);
+  }
+
+  h1, h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--pink);
+  }
+
+  h1 {
+    font-size: 42px;
+    margin: 14px 0 36px;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,.5);
+  }
+
+  h2 { font-size: 38px; }
+
+  .sub {
+    font-size: 20px;
+    margin-top: 8px;
+    color: #fff;
+    text-shadow: 0 1px 8px rgba(0,0,0,.5);
+  }
+
+  #home { display: none; }
+
+  #home.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .menu-card {
+    width: 248px;
+    padding: 56px 24px 48px;
+    border-radius: 24px;
+    background: var(--cream);
+    box-shadow: 0 16px 40px rgba(201, 80, 111, .22);
+    cursor: pointer;
+    transition: transform .25s;
+  }
+
+  .menu-card:hover { transform: translateY(-6px); }
+
+  .menu-card .icon { font-size: 44px; }
+
+  .menu-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    color: var(--pink);
+    font-size: 28px;
+    margin: 18px 0 10px;
+  }
+
+  .menu-card p { font-size: 18px; line-height: 1.5; }
+
+  .group-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #fff;
+    font-size: 28px;
+    margin: 48px 0 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,.5);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1060px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--cream);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 14px 36px rgba(201, 80, 111, .22);
+  }
+
+  .media {
+    height: 250px;
+    background: #fbeef1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pink);
+    font-size: 18px;
+  }
+
+  .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #000;
+  }
+
+  .photo-media {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    display: block;
+    background: transparent;
+  }
+
+  .photo-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    background: transparent;
+  }
+
+  .caption { padding: 16px; font-size: 20px; }
+
+  .letter {
+    max-width: 640px;
+    margin: 32px auto 0;
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 44px 40px;
+    box-shadow: 0 16px 40px rgba(201, 80, 111, .22);
+    text-align: left;
+    font-size: 21px;
+    line-height: 1.75;
+  }
+
+  .letter p + p { margin-top: 16px; }
+
+  .letter .sign {
+    margin-top: 28px;
+    text-align: right;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--pink);
+  }
+
+  .back {
+    display: inline-block;
+    margin-top: 44px;
+    padding: 14px 34px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1px solid var(--pink);
+    background: rgba(255,253,250,.85);
+    color: var(--pink);
+    font-family: inherit;
+    font-size: 20px;
+    letter-spacing: .08em;
+  }
+
+  #music {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 5;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: var(--cream);
+    color: var(--pink);
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  }
+
+  #music.playing { animation: spin 6s linear infinite; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .photo-panel {
+    animation:
+      photoIn 1.2s cubic-bezier(.2,.7,.2,1) backwards,
+      floaty 7s ease-in-out 1.2s infinite;
+  }
+
+  @keyframes photoIn {
+    from { opacity: 0; transform: translateX(-60px) scale(.94); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .rise {
+    animation: riseIn .9s cubic-bezier(.2,.7,.2,1) var(--d, 0s) backwards;
+  }
+
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(26px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .eyebrow.rise { animation: spreadIn 1.6s ease var(--d, 0s) backwards; }
+
+  @keyframes spreadIn {
+    from { opacity: 0; letter-spacing: .7em; }
+    to { opacity: 1; letter-spacing: .3em; }
+  }
+
+  .menu-card {
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  .menu-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 24px 50px rgba(201, 80, 111, .35);
+  }
+
+  .menu-card .icon {
+    display: inline-block;
+    animation: beat 2.2s ease-in-out infinite;
+  }
+
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    12% { transform: scale(1.18); }
+    24% { transform: scale(1); }
+    36% { transform: scale(1.12); }
+    48% { transform: scale(1); }
+  }
+
+  .card {
+    transition:
+      opacity .8s ease,
+      transform .8s cubic-bezier(.2,.7,.2,1),
+      box-shadow .3s ease;
+  }
+
+  .card.pre { opacity: 0; transform: translateY(34px); }
+
+  .card:not(.pre):hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 44px rgba(201, 80, 111, .35);
+  }
+
+  .media img { transition: transform .6s ease; }
+
+  .card:hover .media img { transform: scale(1.06); }
+
+  .card:hover .photo-media img { transform: none; }
+
+  .line { animation: lineIn 1s ease var(--d, 0s) backwards; }
+
+  @keyframes lineIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  .back { transition: background .25s, color .25s, transform .25s; }
+
+  .back:hover {
+    background: var(--pink);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  #music:not(.playing) { animation: ping 2s ease-out infinite; }
+
+  @keyframes ping {
+    0% { box-shadow: 0 0 0 0 rgba(201, 80, 111, .55); }
+    100% { box-shadow: 0 0 0 18px rgba(201, 80, 111, 0); }
+  }
+
+  .burst {
+    position: fixed;
+    z-index: 9;
+    pointer-events: none;
+    color: #ee7f9f;
+    animation: burst 1.1s ease-out forwards;
+  }
+
+  @keyframes burst {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(.4);
+    }
+    to {
+      opacity: 0;
+      transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3);
+    }
+  }
+
+  section.leaving {
+    animation: leave .45s ease forwards;
+    pointer-events: none;
+  }
+
+  @keyframes leave {
+    to {
+      opacity: 0;
+      transform: translateX(-40px) scale(.97);
+      filter: blur(6px);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .photo-panel {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      width: auto;
+      height: 40vh;
+      border-radius: 0 0 28px 28px;
+      border-width: 0 0 5px 0;
+      background-position: center 62%;
+    }
+
+    section {
+      margin-left: 0;
+      width: 100%;
+      padding-top: calc(40vh + 28px);
+    }
+
+    #home.active { justify-content: flex-start; }
+
+    .menu-card { width: 220px; padding: 36px 20px 32px; }
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 34px; }
+    h2 { font-size: 32px; }
+    .letter { padding: 32px 24px; font-size: 19px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="photo-panel"></div>
+<div class="hearts" id="hearts"></div>
+
+<audio id="song" src="lagu.mp3" loop preload="auto"></audio>
+<button id="music" title="Putar / jeda lagu" aria-label="Putar atau jeda lagu">♪</button>
+
+<!-- BERANDA -->
+<section id="home" class="active">
+  <div class="eyebrow">for my last favorite person</div>
+  <h1>yiyi</h1>
+
+  <div class="menu">
+    <div class="menu-card" onclick="show('surat')">
+      <div class="icon">💌</div>
+      <h3>Dibaca ya Sayang</h3>
+    </div>
+
+    <div class="menu-card" onclick="show('kenangan')">
+      <div class="icon">📷</div>
+      <h3>Dibuka ya Semoga Suka</h3>
+    </div>
+  </div>
+</section>
+
+<!-- SURAT -->
+<section id="surat">
+  <h2 style="color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)">DIBACA PELAN PELAN YA CANTIK
+  </h2>
+
+  <div class="letter">
+    <p>Untuk yiyi,</p>
+
+    <p>Dan sampai sekarang , aku masih belum bisa menemukan definisi mengikhlaskan itu seperti apa. Apakah melupakan? merelakan? atau menerima sebuah kehilangan? Entah bagaimana cara mengikhlaskan dengan benar, beberapa orang kerkata "mengikhlaskan itu cukup menerima suatu takdir yang bukan milik kita" tapi nyatanya menerima tidak semudah yang diucapkan. Aku bisa menjalani hariku tanpa kamu sekarang, tapi untuk melupakan mu maaf aku belum bisa dan tidak akan bisa. Aku sudah berusaha sekeras mungkin untuk menghilangkan perasaanku padamu, namun aku tak pernah berhasil melakukannya. Aku sudah berupaya untuk menghilangkannya dari kepalaku, tapi nyatanya aku selalu ingat bagaimana senyuman dari bibirmu, aku selalu teringat bagaimana cara kamu menatapku, aku selalu teringat suaramu ketika sedang membicarakan sesuatu, suara tawamu yang sangat lucu , semuanya masih terekam jelas. Sekarang aku merasa hampa dan kosong, dan benar separuh diriku sudah hilang. Kamu memang banyak memberikan luka, namun aku gagal untuk membencimu. Perasaanku padamu juga tetap sama dan takkan pernah berubah. Berkelanalah kemanapun kamu mau, kelak jika kamu terluka dan merasa sedih lihat lah kebelakang , aku selalu ada untukmu , akan kuberikan senyuman dan pelukan yang hangat hanya untukmu. Dan last hope dariku , aku cuman pengen bilang bahwa hubungan ini adalah harapan terakhirku , karna sama kamulah tujuanku hidup bahagia selalu dan selamanya. Jadi tolong lihat lah diriku sekali lagi</p>
+
+    <p>maaf agak alay tapi jujur ini dari hati. Dibalas yaa</p>
+
+    <div class="sign">— cuuu ndyy</div>
+  </div>
+
+  <button class="back" onclick="show('home')">← Kembali</button>
+</section>
+
+<!-- KENANGAN: Hanya Foto -->
+<section id="kenangan">
+
+  <h2 style="color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)">MASIH INGAT INI?</h2>
+
+
+  <div class="grid">
+    <div class="card">
+      <div class="media photo-media">
+        <img src="kolase-yiyi.jpg" alt="Kolase kenangan Yiyi"
+             onerror="this.replaceWith(document.createTextNode('Foto kolase belum ditemukan'))">
+      </div>
+      <div class="caption">Rendy harap kita berdua bisa kembali di momen ini</div>
+    </div>
+  </div>
+
+  <button class="back" onclick="show('home')">← Kembali</button>
+
+</section>
+
+<script>
+  let moving = false;
+
+  function show(id) {
+    if (moving) return;
+
+    const current = document.querySelector('section.active');
+    const next = document.getElementById(id);
+
+    if (!next || current === next) return;
+
+    moving = true;
+    updateMusic(id);
+
+    current.classList.add('leaving');
+
+    setTimeout(() => {
+      current.classList.remove('active', 'leaving');
+      next.classList.add('active');
+      window.scrollTo(0, 0);
+      moving = false;
+    }, 450);
+  }
+
+  const box = document.getElementById('hearts');
+  for (let i = 0; i < 14; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = '♥';
+    h.style.left = Math.random() * 100 + '%';
+    h.style.fontSize = (16 + Math.random() * 20) + 'px';
+    h.style.animationDuration = (12 + Math.random() * 14) + 's';
+    h.style.animationDelay = (-Math.random() * 20) + 's';
+    box.appendChild(h);
+  }
+
+  const song = document.getElementById('song');
+  const btn = document.getElementById('music');
+
+  function setPlaying(p) {
+    btn.classList.toggle('playing', p);
+    btn.textContent = p ? '♪' : '♫';
+  }
+
+  function updateMusic(id) {
+    if (id === 'surat') {
+      song.play()
+        .then(() => setPlaying(true))
+        .catch(() => setPlaying(false));
+    } else {
+      song.pause();
+      song.currentTime = 0;
+      setPlaying(false);
+    }
+  }
+
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const suratTerbuka = document.getElementById('surat').classList.contains('active');
+    if (!suratTerbuka) return;
+
+    if (song.paused) {
+      song.play()
+        .then(() => setPlaying(true))
+        .catch(() => setPlaying(false));
+    } else {
+      song.pause();
+      setPlaying(false);
+    }
+  });
+
+  document.querySelectorAll('section').forEach(sec => {
+    let i = 0;
+    sec.querySelectorAll('.eyebrow, h1, h2, .sub, .menu-card, .group-title').forEach(el => {
+      el.classList.add('rise');
+      el.style.setProperty('--d', (0.1 + i * 0.15) + 's');
+      i++;
+    });
+
+    sec.querySelectorAll('.letter').forEach(el => {
+      el.classList.add('rise');
+      el.style.setProperty('--d', '0.4s');
+    });
+
+    sec.querySelectorAll('.letter > *').forEach((el, k) => {
+      el.classList.add('line');
+      el.style.setProperty('--d', (1.1 + k * 0.8) + 's');
+    });
+  });
+
+  const cards = document.querySelectorAll('.card');
+  if ('IntersectionObserver' in window) {
+    cards.forEach(c => c.classList.add('pre'));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const t = en.target;
+        const idx = Array.from(t.parentElement.children).indexOf(t);
+        t.style.transitionDelay = (idx * 0.12) + 's';
+        t.classList.remove('pre');
+        setTimeout(() => { t.style.transitionDelay = '0s'; }, 1400);
+        io.unobserve(t);
+      });
+    }, { threshold: 0.15 });
+    cards.forEach(c => io.observe(c));
+  }
+
+  document.addEventListener('click', e => {
+    for (let i = 0; i < 7; i++) {
+      const h = document.createElement('div');
+      h.className = 'burst';
+      h.textContent = '♥';
+      h.style.left = e.clientX + 'px';
+      h.style.top = e.clientY + 'px';
+      h.style.fontSize = (14 + Math.random() * 16) + 'px';
+      h.style.setProperty('--dx', ((Math.random() - 0.5) * 140) + 'px');
+      h.style.setProperty('--dy', (-40 - Math.random() * 110) + 'px');
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1200);
+    }
+  });
+</script>
+
+</body>
+</html>
